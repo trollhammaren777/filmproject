@@ -3,7 +3,7 @@
 {% block title %}Director detail{% endblock %}
 
 {% block content %}
-<h1>Grnre detail</h1>
+<h1>Genre detail</h1>
 <div class="genre-detail">
     <p>Название жанра: {{ genre.name }}</p>
     <form method="GET" class="get-form" action="{% url 'genre_edit' pk=genre.pk %}">

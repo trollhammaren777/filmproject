@@ -1,8 +1,15 @@
-from django.urls import path, re_path
+from django.urls import path, include
+from rest_framework import routers
 
-from .views import film_index, users, index, director_create, director_detail, director_edit, get_all_directors, \
+from films.views import film_index, users, index, director_create, director_detail, director_edit, get_all_directors, \
     genre_create, genre_detail, genre_edit, get_all_genres, movie_create, movie_detail, movie_edit, get_all_movies, \
     director_search, movie_search, genre_search
+from films.views import GenreViewSet, MovieViewSet, DirectorViewSet
+
+router = routers.DefaultRouter()
+router.register(r'genres', GenreViewSet)
+router.register(r'movies', MovieViewSet)
+router.register(r'directors', DirectorViewSet)
 
 urlpatterns = [
     path('', index, name='index'),
@@ -26,8 +33,8 @@ urlpatterns = [
     path('movie/search', movie_search, name="movie_search_list"),
 
     path('<int:film_id>', film_index),
-    path('<int:user_id>; <str:user_name>', users)
-
+    path('<int:user_id>; <str:user_name>', users),
     # path('social_auth/')
 
+    path("api/", include(router.urls))
 ]

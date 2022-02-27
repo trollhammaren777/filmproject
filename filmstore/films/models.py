@@ -10,8 +10,7 @@ class Director(models.Model):
     death_date = models.DateField(
         null=False, blank=False, db_column="death_date", default="9999-12-31", verbose_name="Дата смерти"
     )
-    cover = models.FileField(null=True, verbose_name="Фото режиссёра")
-
+    cover = models.FileField(null=True, blank=True, verbose_name="Фото режиссёра")
     objects = models.Manager()
 
     def __str__(self) -> str:

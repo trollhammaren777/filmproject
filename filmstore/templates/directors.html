@@ -3,17 +3,17 @@
 {% block title %}Directors{% endblock %}
 
 {% block content %}
-<h1>Directors:</h1>
+    <h1>Directors:</h1>
 
-{% for director in directors %}
-<div>
-    <a href="{% url 'director_detail' pk=director.pk %}">{{ director.full_name }}</a>
-</div>
-{% empty %}
-   No directors matching your request.
-{% endfor %}
-<div>
-    <br/>
-    <a href="{% url 'index' %}">Обратно на главную</a>
-</div>
+    {% for director in directors %}
+        <div>
+            <a href="{% url 'director_detail' pk=director.pk %}">{{ director.full_name }}</a>
+        </div>
+    {% empty %}
+        No directors matching your request.
+    {% endfor %}
+    <div>
+        <br/>
+        <a href="{% url 'index' %}">Обратно на главную</a>
+    </div>
 {% endblock %}

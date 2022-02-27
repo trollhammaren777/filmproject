@@ -3,17 +3,17 @@
 {% block title %}Directors{% endblock %}
 
 {% block content %}
-<h1>Genres:</h1>
+    <h1>Genres:</h1>
 
-{% for genre in genres %}
-<div>
-    <a href="{% url 'genre_detail' pk=genre.pk %}">{{ genre.name }}</a>
-</div>
-{% empty %}
-   No genres matching your request.
-{% endfor %}
-<div>
-    <br/>
-    <a href="{% url 'index' %}">Обратно на главную</a>
-</div>
+    {% for genre in genres %}
+        <div>
+            <a href="{% url 'genre_detail' pk=genre.pk %}">{{ genre.name }}</a>
+        </div>
+    {% empty %}
+        No genres matching your request.
+    {% endfor %}
+    <div>
+        <br/>
+        <a href="{% url 'index' %}">Обратно на главную</a>
+    </div>
 {% endblock %}
