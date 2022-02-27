@@ -18,6 +18,7 @@ class DirectorViewSet(viewsets.ModelViewSet):
 
 class MovieViewSet(viewsets.ModelViewSet):
     serializer_class = MovieSerializer
+
     queryset = Movie.objects.all()
 
 
