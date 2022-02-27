@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'films',
     'rest_framework',
-
     'debug_toolbar',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
             ],
         },
     },
@@ -159,3 +160,17 @@ MEDIA_URL = '/media/'
 FILE_UPLOAD_HANDLERS = ["django.core.files.uploadhandler.MemoryFileUploadHandler",
                         "django.core.files.uploadhandler.TemporaryFileUploadHandler"]
 
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.vk.VKOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = 'XXXXXX'
+SOCIAL_AUTH_VK_OAUTH2_SECRET = 'XXXXXXXXXXXXX'
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'login'

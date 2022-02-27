@@ -28,5 +28,6 @@ urlpatterns = [
     path('<int:film_id>', film_index),
     path('<int:user_id>; <str:user_name>', users)
 
+    # path('social_auth/')
 
 ]

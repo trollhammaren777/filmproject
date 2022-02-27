@@ -30,10 +30,8 @@ urlpatterns = [
 
     re_path(r'users/(?P<user_id>\d+)/(?P<user_name>\D+/)', include('films.urls')),
 
-
-
     path('__debug__/', include('debug_toolbar.urls')),
 
-
+    path('social_auth/', include('social_django.urls', namespace='social')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
