@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Director detail{% endblock %}
+
+{% block content %}
+<h1>Director detail</h1>
+<div class="director">
+    <p>Имя и фамилия: {{ director.full_name }}</p>
+    <br/>
+    <p>Дата рождения: {{ director.birth_date }}</p>
+    <br/>
+    <p>Возраст: {{ director.age }}</p>
+    <br/>
+    <p>Дата смерти: {{ director.death_date }}</p>
+    <form method="GET" class="get-form" action="{% url 'director_edit' pk=director.pk %}">
+        {% csrf_token %}
+        <button type="submit" class="delete btn btn-default">Изменить информацию в профиле режиссёра</button>
+    </form>
+    <br/>
+    <form method="POST" class="post-form" action="{% url 'director_detail' pk=director.pk %}">
+        {% csrf_token %}
+        <button type="submit" class="delete btn btn-default">Удалить профиль режиссёра с сайта</button>
+    </form>
+    <br/>
+    <br/>
+</div>
+<div>
+    <a href="{% url 'index' %}">Обратно на главную</a>
+</div>
+{% endblock %}

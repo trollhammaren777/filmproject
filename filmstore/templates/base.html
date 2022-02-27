@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Q&A{% endblock %}</title>
+    {% block extrahead %}{% endblock %}
+</head>
+<body>
+    {% block content %}
+    <nav>
+        <div>
+            <form class="d-flex" method="post" action="{% url 'movie_search_list' %}">
+                {% csrf_token %}
+                <input class="form-control me-2" type="search" placeholder="Search Movies" aria-label="Search"
+                name="searched">
+                <button class="btn btn-outline-success" type="submit">Search movie</button>
+            </form>
+        </div>
+    </nav>
+    <h1>Welcome to film store</h1>
+    <div>
+        <a href="{% url 'director_create' %}">Создать новую запись про режиссёра</a>
+    </div>
+    <br/>
+    <div>
+        <a href="{% url 'directors_list' %}">Посмотреть список режиссёров</a>
+    </div>
+    <br/>
+    <div>
+        <a href="{% url 'genre_create' %}">Создать новую запись о жанре</a>
+    </div>
+    <br/>
+    <div>
+        <a href="{% url 'genre_list' %}">Посмотреть список жанров</a>
+    </div>
+    <br/>
+    <div>
+        <a href="{% url 'movie_create' %}">Создать новую запись о фильме</a>
+    </div>
+    </br>
+    <div>
+        <a href="{% url 'movie_list' %}">Посмотреть список фильмов</a>
+    </div>
+    {% endblock %}
+</body>
+</html>

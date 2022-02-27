@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Director detail{% endblock %}
+
+{% block content %}
+<h1>Grnre detail</h1>
+<div class="genre-detail">
+    <p>Название жанра: {{ genre.name }}</p>
+    <form method="GET" class="get-form" action="{% url 'genre_edit' pk=genre.pk %}">
+        {% csrf_token %}
+        <button type="submit" class="delete btn btn-default">Изменить информацию в записи о жанре</button>
+    </form>
+    <br/>
+    <form method="POST" class="post-form" action="{% url 'genre_detail' pk=genre.pk %}">
+        {% csrf_token %}
+        <button type="submit" class="delete btn btn-default">Удалить жанр с сайта</button>
+    </form>
+    <br/>
+    <br/>
+</div>
+<div>
+    <a href="{% url 'index' %}">Обратно на главную</a>
+</div>
+{% endblock %}

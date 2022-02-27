@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Search{% endblock %}
+
+{% block content %}
+<div>
+    <center>
+        {% if searched %}
+            <h1>You searched for {{ searched }}</h1>
+            <br/>
+            {% for movie in movies %}
+                <a href="{% url 'movie_detail' pk=movie.pk %}">{{ movie.title }}</a>
+            {% empty %}
+                <p>No results found</p>
+            {% endfor %}
+        {% else %}
+            <h1>You haven't entered search data</h1>
+        {% endif %}
+    </center>
+    <br/>
+    <br/>
+</div>
+<div>
+    <a href="{% url 'index' %}">Обратно на главную</a>
+</div>
+{% endblock %}

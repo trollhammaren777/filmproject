@@ -1,0 +1,52 @@
+version: '3.8'
+services:
+#  nginx:
+#    container_name: dev_web
+#    restart: on-failure
+#    image: nginx:1.19.8
+#    volumes:
+##      - ./nginx/prod/nginx.conf:/etc/nginx/conf.d/default.conf
+#      - ./nginx/nginx.conf
+##      - static_volume:/app/static
+#    ports:
+#      - "8000:8000"
+#    depends_on:
+#      - web
+  web:
+    container_name: dev_backend
+    build: filmstore
+#    restart: always
+    env_file: ./.env.dev
+    command: sh -c "python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./filmstore/:/usr/src/
+#     - static_volume:/app/static
+    depends_on:
+      - db
+#      db:
+#        condition: service_healthy
+    links:
+      - db
+
+  db:
+    container_name: dev_db
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=max
+      - POSTGRES_PASSWORD=mmm
+      - POSTGRES_DB=project_db
+    ports:
+      - "5432:5432"
+#    healthcheck:
+#      test: ["CMD-SHELL", "pg_isready -U max"]
+#      interval: 5s
+#      timeout: 5s
+#      retries: 5
+
+volumes:
+#  static_volume:
+  postgres_data:

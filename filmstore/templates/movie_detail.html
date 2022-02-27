@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Movie detail{% endblock %}
+
+{% block content %}
+<h1>Movie detail</h1>
+<div class="movie">
+    <p>Название: {{ movie.title }}</p>
+    <br/>
+
+    <p>Режиссёр: </p>
+    {% for director in movie.directors.all %}
+        <a href="{% url 'director_detail' pk=director.pk %}"> {{ director.full_name }}</a>
+    {% empty %}
+    This movie does not have any director associated with it.
+    {% endfor %}
+
+    <p>Жанр: </p>
+    {% for genre in movie.genres.all %}
+        <a href="{% url 'genre_detail' pk=genre.pk %}">{{ genre.name }}</a>
+    {% empty %}
+    This movie does not have any genre associated with it.
+    {% endfor %}
+
+    <br/>
+    <p>Цена: {{ movie.price }}</p>
+    <br/>
+
+    <form method="GET" class="get-form" action="{% url 'movie_edit' pk=movie.pk %}">
+        {% csrf_token %}
+        <button type="submit" class="delete btn btn-default">Изменить информацию о фильме</button>
+    </form>
+    <br/>
+    <form method="POST" class="post-form" action="{% url 'movie_detail' pk=movie.pk %}">
+        {% csrf_token %}
+        <button type="submit" class="delete btn btn-default">Удалить запись о фильме с сайта</button>
+    </form>
+    <br/>
+    <br/>
+</div>
+<div>
+    <a href="{% url 'index' %}">Обратно на главную</a>
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ block.super }} - главная
+{% endblock %}
+{% block content %}
+    {% for obj in films %}
+        <div class="question">
+            <a href="{{ obj.build_url">{{ obj }}</a>
+        </div>
+    {% endfor %}
+{% endblock %}
