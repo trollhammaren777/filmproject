@@ -30,6 +30,7 @@ class DirectorDetailAPIView(RetrieveAPIView):
 
 class MovieDetail(RetrieveUpdateAPIView):
     serializer_class = MovieSerializer
+
     queryset = Movie.objects.all()
 
 

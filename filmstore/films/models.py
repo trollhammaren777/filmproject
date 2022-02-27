@@ -11,6 +11,7 @@ class Director(models.Model):
         null=False, blank=False, db_column="death_date", default="9999-12-31", verbose_name="Дата смерти"
     )
     cover = models.FileField(null=True, verbose_name="Фото режиссёра")
+
     objects = models.Manager()
 
     def __str__(self) -> str:
