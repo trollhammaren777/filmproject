@@ -3,17 +3,17 @@
 {% block title %}Movies{% endblock %}
 
 {% block content %}
-<h1>Movies:</h1>
+    <h1>Movies:</h1>
 
-{% for movie in movies %}
-<div>
-    <a href="{% url 'movie_detail' pk=movie.pk %}">{{ movie.title }}</a>
-</div>
-{% empty %}
-   No movies matching your request.
-{% endfor %}
-<div>
-    <br/>
-    <a href="{% url 'index' %}">Обратно на главную</a>
-</div>
+    {% for movie in movies %}
+        <div>
+            <a href="{% url 'movie_detail' pk=movie.pk %}">{{ movie.title }}</a>
+        </div>
+    {% empty %}
+        No movies matching your request.
+    {% endfor %}
+    <div>
+        <br/>
+        <a href="{% url 'index' %}">Обратно на главную</a>
+    </div>
 {% endblock %}

@@ -3,25 +3,25 @@
 {% block title %}Films{% endblock %}
 
 {% block content %}
-<h1>Available films:</h1>
+    <h1>Available films:</h1>
 
-<form action="{% url 'films-list' %}" method="get">
-  <input name="search" size="40" type="text"/>
-  <input type="submit" value="Search"/>
-</form>
-{% for film in films %}
-  <div>
-    <a href="{{ film.get_absolute_url }}">
-      <p>{{ film.title }}</p>
-    </a>
-    <p>By {{ film.directors.first.full_name }}</p>
-    <p>{{ film.price }} ₽</p>
-  </div>
-{% empty %}
-    No films matching your request.
-{% endfor %}
-<form action="{% url 'films-list' %}" method="post">
-  <input name="search" size="40" type="text"/>
-  <input type="submit" value="Search"/>
-</form>
+    <form action="{% url 'films-list' %}" method="get">
+        <input name="search" size="40" type="text"/>
+        <input type="submit" value="Search"/>
+    </form>
+    {% for film in films %}
+        <div>
+            <a href="{{ film.get_absolute_url }}">
+                <p>{{ film.title }}</p>
+            </a>
+            <p>By {{ film.directors.first.full_name }}</p>
+            <p>{{ film.price }} ₽</p>
+        </div>
+    {% empty %}
+        No films matching your request.
+    {% endfor %}
+    <form action="{% url 'films-list' %}" method="post">
+        <input name="search" size="40" type="text"/>
+        <input type="submit" value="Search"/>
+    </form>
 {% endblock %}

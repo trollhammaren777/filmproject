@@ -1,49 +1,27 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
 from django.views.decorators.http import require_http_methods
 from django.core.files.uploadhandler import TemporaryFileUploadHandler
 
-from rest_framework.generics import get_object_or_404, RetrieveAPIView, RetrieveUpdateAPIView, ListCreateAPIView
+from rest_framework.generics import get_object_or_404
+from rest_framework import viewsets
 
 from .models import Director, Movie, Genre
 from .forms import DirectorForm, MovieForm, GenreForm
 from .serializers import DirectorSerializer, GenreSerializer, MovieSerializer
 
 
-class DirectorDetail(RetrieveUpdateAPIView):
+class DirectorViewSet(viewsets.ModelViewSet):
     serializer_class = DirectorSerializer
     queryset = Director.objects.all()
 
 
-class DirectorCreateUpdateList(ListCreateAPIView):
-    serializer_class = DirectorSerializer
-    queryset = Director.objects.all()
-
-    def perform_create(self, serializer):
-        serializer.save(creator=self.request.user)
-
-
-class DirectorDetailAPIView(RetrieveAPIView):
-    serializer_class = DirectorSerializer
-    queryset = Director.objects.all()
-
-
-class MovieDetail(RetrieveUpdateAPIView):
+class MovieViewSet(viewsets.ModelViewSet):
     serializer_class = MovieSerializer
     queryset = Movie.objects.all()
 
 
-class MovieList(ListCreateAPIView):
-    serializer_class = MovieSerializer
-    queryset = Movie.objects.all()
-
-
-class GenreDetail(RetrieveUpdateAPIView):
-    serializer_class = GenreSerializer
-    queryset = Genre.objects.all()
-
-
-class GenreList(ListCreateAPIView):
+class GenreViewSet(viewsets.ModelViewSet):
     serializer_class = GenreSerializer
     queryset = Genre.objects.all()
 
@@ -67,7 +45,7 @@ def director_create(request):
             return redirect('director_detail', pk=director.pk)
     else:
         form = DirectorForm()
-    return render(request, 'director_edit.html', {'form': form})
+    return render(request, '_edit.html', {'form': form})
 
 
 @require_http_methods(["POST", "GET"])
@@ -87,7 +65,7 @@ def director_edit(request, pk):
             return redirect('director_detail', pk=director.pk)
     else:
         form = DirectorForm(instance=director)
-    return render(request, 'director_edit.html', {'form': form})
+    return render(request, '_edit.html', {'form': form})
 
 
 @require_http_methods(["GET", "POST"])
@@ -102,7 +80,7 @@ def director_detail(request, pk):
 
 @require_http_methods(["GET"])
 def get_all_directors(request):
-    return render(request, 'directors.html', {'directors': Director.objects.all()})
+    return render(request, '_list.html', {'objects': Director.objects.all()})
 
 
 @require_http_methods(["POST", "GET"])
@@ -116,7 +94,7 @@ def genre_create(request):
             return redirect('genre_detail', pk=genre.pk)
     else:
         form = GenreForm()
-    return render(request, 'genre_edit.html', {'form': form})
+    return render(request, '_edit.html', {'form': form})
 
 
 @require_http_methods(["POST", "GET"])
@@ -131,7 +109,7 @@ def genre_edit(request, pk):
             return redirect('genre_detail', pk=genre.pk)
     else:
         form = GenreForm(instance=genre)
-    return render(request, 'genre_edit.html', {'form': form})
+    return render(request, '_edit.html', {'form': form})
 
 
 @require_http_methods(["GET", "POST"])
@@ -161,7 +139,7 @@ def movie_create(request):
             return redirect('movie_detail', pk=movie.pk)
     else:
         form = MovieForm()
-    return render(request, 'movie_edit.html', {'form': form})
+    return render(request, '_edit.html', {'form': form})
 
 
 @require_http_methods(["POST", "GET"])
@@ -180,7 +158,7 @@ def movie_edit(request, pk):
             return redirect('movie_detail', pk=movie.pk)
     else:
         form = MovieForm(instance=movie)
-    return render(request, 'movie_edit.html', {'form': form})
+    return render(request, '_edit.html', {'form': form})
 
 
 @require_http_methods(["GET", "POST"])
